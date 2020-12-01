@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+ 
+</head>
+<body>
+  <div id="app"></div>
+</body>
+<script src="https://unpkg.com/mermaid/dist/mermaid.js"></script>
+<script>
+  var num = 0;
+  mermaid.initialize({
+    startOnLoad: false,
+    arrowMarkerAbsolute: false,
+    flowchart: {
+      useMaxWidth: false,
+      htmlLabels: true
+      //curve:'cardinal'
+    },
+    securityLevel:'loose',
+  });
+  window.$docsify = {
+    auto2top: true,
+    subMaxLevel: 3,
+    name: '',
+    repo: '',
+    homepage: 'README.md',
+    loadSidebar: true,
+    loadNavbar: true,
+    search: 'auto',
+    search: {
+      maxAge: 86400000, // Expiration time, the default one day
+      paths: 'auto',
+      placeholder: 'Search...',
+      noData: 'No Results!',
+      depth: 7,
+      hideOtherSidebarContent: false, // whether or not to hide other sidebar content
+    },
+    copyCode: {
+      buttonText : 'Copy to clipboard',
+      errorText  : 'Error',
+      successText: 'Copied'
+    },
+    scrollToTop: {
+        auto: true,
+        text: 'Top',
+        right: 15,
+        bottom: 15,
+        offset: 300
+    },
+    markdown: {
+      renderer: {
+        code: function (code, lang) {
+          if (lang === "mermaid") {
+            return (
+              '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+            );
+          }
+          return this.origin.code.apply(this, arguments);
+        }
+      }
+    }
+  }
+  </script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="https://unpkg.com/docsify-copy-code@2"></script>
+  <script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</html>
